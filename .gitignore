@@ -1,0 +1,24 @@
+.venv/
+.venv-v2e/
+__pycache__/
+*.egg-info/
+artifacts/
+ros_ws/build/
+ros_ws/install/
+ros_ws/log/
+.env
+.env.*
+!.env.example
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+.DS_Store
+Thumbs.db
+.venv-*/
+third_party/wheels/*.whl
+
+# Reproducible outputs and local development history
+/reports/
+/docs/DEVELOPMENT.md
+/third_party/wheels/

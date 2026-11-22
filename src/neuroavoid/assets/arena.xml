@@ -1,0 +1,45 @@
+<mujoco model="manual_robot">
+  <option timestep="0.005" integrator="implicitfast"/>
+  <visual><global offwidth="128" offheight="128"/></visual>
+  <default>
+    <geom friction="1 0.005 0.0001" condim="3"/>
+    <joint damping="0.01"/>
+  </default>
+  <asset>
+    <texture name="tiles" type="2d" builtin="checker" rgb1="0.2 0.25 0.3" rgb2="0.4 0.45 0.5" width="256" height="256"/>
+    <material name="floor" texture="tiles" texrepeat="8 8" texuniform="true"/>
+  </asset>
+  <worldbody>
+    <site name="start_zone" type="cylinder" pos="-2 0 0.006" size="0.28 0.004" rgba="0.1 0.5 1 0.5"/>
+    <site name="goal_zone" type="cylinder" pos="2.2 0 0.006" size="0.28 0.004" rgba="0.1 1 0.3 0.7"/>
+    <light pos="0 0 4" diffuse="0.8 0.8 0.8"/>
+    <geom name="floor" type="plane" size="4 3 0.1" material="floor"/>
+    <geom name="wall_east" type="box" pos="3 0 0.3" size="0.1 2.5 0.3" rgba="0.6 0.6 0.65 1"/>
+    <geom name="wall_west" type="box" pos="-3 0 0.3" size="0.1 2.5 0.3" rgba="0.6 0.6 0.65 1"/>
+    <geom name="wall_north" type="box" pos="0 2.5 0.3" size="3 0.1 0.3" rgba="0.6 0.6 0.65 1"/>
+    <geom name="wall_south" type="box" pos="0 -2.5 0.3" size="3 0.1 0.3" rgba="0.6 0.6 0.65 1"/>
+    <geom name="obstacle_front" type="box" pos="0 0 0.3" size="0.22 0.45 0.3" rgba="0.9 0.25 0.1 1"/>
+    <geom name="obstacle_left" type="cylinder" pos="0.8 1.2 0.3" size="0.3 0.3" rgba="0.2 0.7 0.3 1"/>
+    <geom name="obstacle_right" type="box" pos="1.5 -1 0.25" size="0.35 0.3 0.25" rgba="0.9 0.7 0.15 1"/>
+    <body name="robot" pos="-2 0 0.14">
+      <freejoint name="base"/>
+      <geom name="chassis" type="box" size="0.16 0.12 0.045" mass="1" rgba="0.1 0.5 0.9 1"/>
+      <geom name="nose" type="box" pos="0.15 0 0.05" size="0.025 0.07 0.015" mass="0.02" rgba="0.9 0.9 1 1"/>
+      <camera name="onboard" pos="0.18 0 0.08" xyaxes="0 -1 0 0 0 1" fovy="75"/>
+      <geom name="caster_front" type="sphere" pos="0.13 0 -0.11" size="0.03" mass="0.02" priority="1" friction="0.001 0.0001 0.0001"/>
+      <geom name="caster_back" type="sphere" pos="-0.13 0 -0.11" size="0.03" mass="0.02" priority="1" friction="0.001 0.0001 0.0001"/>
+      <body name="left_wheel" pos="0 0.15 -0.04">
+        <joint name="left_axle" type="hinge" axis="0 1 0"/>
+        <geom name="left_tire" type="cylinder" size="0.1 0.025" quat="0.70710678 0.70710678 0 0" mass="0.12" rgba="0.08 0.08 0.08 1"/>
+      </body>
+      <body name="right_wheel" pos="0 -0.15 -0.04">
+        <joint name="right_axle" type="hinge" axis="0 1 0"/>
+        <geom name="right_tire" type="cylinder" size="0.1 0.025" quat="0.70710678 0.70710678 0 0" mass="0.12" rgba="0.08 0.08 0.08 1"/>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <velocity name="left_motor" joint="left_axle" kv="2" ctrllimited="true" ctrlrange="-8 8" forcelimited="true" forcerange="-2 2"/>
+    <velocity name="right_motor" joint="right_axle" kv="2" ctrllimited="true" ctrlrange="-8 8" forcelimited="true" forcerange="-2 2"/>
+  </actuator>
+</mujoco>

@@ -1,0 +1,9 @@
+# CPU PyTorch is installed separately from its official wheel index.
+numpy==1.26.4
+numba==0.60.0
+matplotlib==3.8.4
+opencv-python-headless==4.10.0.84
+Pillow==11.3.0
+screeninfo==0.8.1
+engineering-notation==0.10.0
+easygui==0.98.3
